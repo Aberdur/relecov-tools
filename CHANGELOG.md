@@ -25,6 +25,7 @@ Code contributions to the release:
 #### Fixes
 
 - Fixed read-bioinfo-metadata module [#367](https://github.com/BU-ISCIII/relecov-tools/pull/367)
+- Fixed relecov-schema duplicated "Analysis Date" label [#374](https://github.com/BU-ISCIII/relecov-tools/pull/374)
 
 #### Changed
 
