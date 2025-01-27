@@ -2856,7 +2856,7 @@
             "format": "date",
             "description": "The time the processing of the data started",
             "classification": "Bioinformatics and QC metrics fields",
-            "label": "Analysis date",
+            "label": "Processing date",
             "fill_mode": "batch",
             "minLenght": "1"
         },
