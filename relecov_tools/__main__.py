@@ -1065,6 +1065,12 @@ def wrapper(ctx, config_file, output_folder):
 @click.option("-p", "--password", help="password for the user to login")
 @click.option("-b", "--batch_id", help="Batch from....")
 @click.option(
+    "--no-email",
+    is_flag=True,
+    default=False,
+    help="If set, skips sending the email notification to the lab.",
+)
+@click.option(
     "-t",
     "--template_path",
     required=False,
@@ -1074,11 +1080,11 @@ def wrapper(ctx, config_file, output_folder):
     "-r", "--project", default="Relecov", help="Project to which the samples belong"
 )
 @click.pass_context
-def upload_results(ctx, user, password, batch_id, template_path, project):
+def upload_results(ctx, user, password, batch_id, template_path, project, no_email):
     """Upload batch results to sftp server."""
     debug = ctx.obj.get("debug", False)
     upload_sftp = relecov_tools.upload_results.UploadSftp(
-        user, password, batch_id, template_path, project
+        user, password, batch_id, template_path, project, send_email=not no_email
     )
     try:
         upload_sftp.execute_process()

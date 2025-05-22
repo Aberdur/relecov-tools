@@ -27,6 +27,7 @@ class UploadSftp(BaseModule):
         batch_id=None,
         template_path=None,
         project="Relecov",
+        send_email=True,
     ):
         """Starts the SFTP upload process"""
         super().__init__(called_module=__name__)
@@ -35,6 +36,7 @@ class UploadSftp(BaseModule):
         if not batch_id:
             raise ValueError("Error: You must provide a batch_id as an argument.")
         self.set_batch_id(batch_id)
+        self.send_email = send_email
         config_json = ConfigJson(extra_config=True)
         config = config_json.get_configuration("mail_sender")
         sftp_config = config_json.get_configuration("sftp_handle")
@@ -268,7 +270,7 @@ class UploadSftp(BaseModule):
 
                     institution_info = institutions_data.get(cod)
 
-                    if institution_info:
+                    if institution_info and self.send_email:
                         # After successful upload, send the results email
                         receiver_email = [institution_info["email_receiver"]]
                         lab_code = cod
