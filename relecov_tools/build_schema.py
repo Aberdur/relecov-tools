@@ -648,7 +648,8 @@ class SchemaBuilder(BaseModule):
             return True
         if diff_output_choice in ["Save to file", "Both"]:
             diff_filepath = os.path.join(
-                os.path.realpath(self.output_folder) + "/build_schema_diff.txt"
+                os.path.realpath(self.output_folder),
+                f"build_schema_diff_v{self.version}.txt"
             )
             with open(diff_filepath, "w") as diff_file:
                 diff_file.write("\n".join(diff_lines))
@@ -1182,7 +1183,7 @@ class SchemaBuilder(BaseModule):
                 shorten_path(self.output_folder),
                 shorten_path(f"{self.output_folder}/relecov_schema.json"),
                 shorten_path(self.base_schema_path),
-                shorten_path(f"{self.output_folder}/build_schema_diff.txt"),
+                shorten_path(f"{self.output_folder}/build_schema_diff_v*.txt"),
                 shorten_path(f"{self.output_folder}/Relecov_metadata_template_v*.xlsx"),
             ],
         }
